@@ -1,15 +1,11 @@
 package org.txk64;
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.*;
 
 public class MainWindow extends JFrame {
-    private final JLabel numberSelectorLabel;
     private final JSpinner numberSelector;
 
-    private final JLabel isHappyDisplayLabel;
     private final JTextField isHappyDisplayField;
 
     private MainWindow() {
@@ -20,17 +16,9 @@ public class MainWindow extends JFrame {
         setTitle("HappyNumber");
 
         // setup UI components
-        numberSelectorLabel = new JLabel("Number: ");
-
         numberSelector = new JSpinner(new SpinnerNumberModel(1, 1, Integer.MAX_VALUE, 1));
-        numberSelector.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                updateIsHappyDisplayField();
-            }
-        });
+        numberSelector.addChangeListener(e -> updateIsHappyDisplayField());
 
-        isHappyDisplayLabel = new JLabel("Is happy?: ");
         isHappyDisplayField = new JTextField();
 
         updateIsHappyDisplayField();
@@ -43,7 +31,7 @@ public class MainWindow extends JFrame {
         constraints.insets = new Insets(10, 10, 5, 5);
         constraints.weightx = 0.0d;
         constraints.weighty = 0.5d;
-        add(numberSelectorLabel, constraints);
+        add(new JLabel("Number: "), constraints);
 
         constraints.gridx = 1;
         constraints.insets = new Insets(10, 5, 5, 10);
@@ -54,7 +42,7 @@ public class MainWindow extends JFrame {
         constraints.gridy = 1;
         constraints.insets = new Insets(5, 10, 10, 5);
         constraints.weightx = 0.0d;
-        add(isHappyDisplayLabel, constraints);
+        add(new JLabel("Is happy?: "), constraints);
 
         constraints.gridx = 1;
         constraints.insets = new Insets(5, 5, 10, 10);
