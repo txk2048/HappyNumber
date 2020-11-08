@@ -1,6 +1,8 @@
 package org.txk64;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 
 public class MainWindow extends JFrame {
@@ -19,10 +21,19 @@ public class MainWindow extends JFrame {
 
         // setup UI components
         numberSelectorLabel = new JLabel("Number: ");
+
         numberSelector = new JSpinner(new SpinnerNumberModel(1, 1, Integer.MAX_VALUE, 1));
+        numberSelector.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                updateIsHappyDisplayField();
+            }
+        });
 
         isHappyDisplayLabel = new JLabel("Is happy?: ");
         isHappyDisplayField = new JTextField();
+
+        updateIsHappyDisplayField();
 
         GridBagConstraints constraints = new GridBagConstraints();
 
@@ -49,6 +60,15 @@ public class MainWindow extends JFrame {
         constraints.insets = new Insets(5, 5, 10, 10);
         constraints.weightx = 1.0d;
         add(isHappyDisplayField, constraints);
+    }
+
+    private void updateIsHappyDisplayField() {
+        int n = (int)numberSelector.getValue();
+
+        boolean happy = HappyNumber.isHappy(n);
+        isHappyDisplayField.setText(
+                happy ? "Happy" : "Not happy"
+        );
     }
 
     public static void display() {
