@@ -5,14 +5,14 @@ import java.awt.*;
 
 public class MainWindow extends JFrame {
     private final JSpinner numberSelector;
-
     private final JTextField isHappyDisplayField;
 
     private MainWindow() {
         // window setup code
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new GridBagLayout());
-        setSize(300, 300);
+        setResizable(false);
+        setSize(270, 120);
         setTitle("HappyNumber");
 
         // setup UI components
@@ -21,9 +21,12 @@ public class MainWindow extends JFrame {
 
         isHappyDisplayField = new JTextField();
         isHappyDisplayField.setEditable(false);
+        isHappyDisplayField.setHorizontalAlignment(JTextField.RIGHT);
 
+        // do initial calculation
         updateIsHappyDisplayField();
 
+        // layout components in UI
         GridBagConstraints constraints = new GridBagConstraints();
 
         constraints.fill = GridBagConstraints.BOTH;
