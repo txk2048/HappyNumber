@@ -20,6 +20,7 @@ public class MainWindow extends JFrame {
         numberSelector.addChangeListener(e -> updateIsHappyDisplayField());
 
         isHappyDisplayField = new JTextField();
+        isHappyDisplayField.setEditable(false);
 
         updateIsHappyDisplayField();
 
